@@ -17,6 +17,7 @@
     --mono: 'JetBrains Mono', ui-monospace, monospace;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     margin: 0;
     background: var(--paper);
@@ -148,7 +149,7 @@
     <nav class="site-nav" aria-label="Main">
       <a href="#featured">Featured</a>
       <a href="#log">Print log</a>
-      <a href="#">Contact</a>
+      <a href="#" hidden>Contact</a><!-- contact: hidden for now -->
     </nav>
   </div>
 </header>
@@ -163,7 +164,7 @@
       <p class="lede">Ideas are exciting, but there is something different about being able to hold a thing.</p>
       <div class="actions">
         <a class="btn btn-solid" href="#log">Browse recent designs</a>
-        <a class="btn btn-ghost" href="#">Request something</a>
+        <a class="btn btn-ghost" href="#" hidden>Request something</a><!-- contact: hidden for now -->
       </div>
     </div>
   </section>
@@ -292,7 +293,8 @@
     </ul>
   </section>
 
-  <section class="commission">
+  <!-- contact: hidden for now -->
+  <section class="commission" hidden>
     <div class="wrap">
       <h2>Want something that doesn't exist, yet?</h2>
       <div>
