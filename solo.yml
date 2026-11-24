@@ -1,0 +1,20 @@
+# Visit https://soloterm.com to learn more
+name: cycleandhammer.com
+icon: null
+processes:
+  Assets:
+    # Solo's AppImage sets PYTHONHOME/PYTHONPATH, which breaks the system python3
+    command: env -u PYTHONHOME -u PYTHONPATH python3 .assets/view-assets.py --port 8123 --no-browser
+    working_dir: null
+    auto_start: true
+    auto_restart: true
+    restart_when_changed:
+      - .assets/view-assets.py
+    env: {}
+  Site:
+    # Static server for index.html at http://127.0.0.1:8124
+    command: env -u PYTHONHOME -u PYTHONPATH python3 -m http.server 8124 --bind 127.0.0.1
+    working_dir: null
+    auto_start: true
+    auto_restart: true
+    env: {}

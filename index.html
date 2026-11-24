@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cycle &amp; Hammer — Workshop Catalog</title>
+<link rel="icon" href="images/cycle-hammer.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f2ea;
+    --ink: #1a1d21;
+    --muted: #4a4d50;
+    --khaki: #c9c49c;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+  a { color: var(--ink); }
+  a:hover { color: var(--muted); }
+  img { display: block; }
+
+  .wrap { max-width: 1200px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+  .mono { font-family: var(--mono); }
+  .label { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .ph { background: repeating-linear-gradient(135deg, #e4e0cc 0 10px, #ece9da 10px 20px); }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 14px 22px;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid var(--ink);
+  }
+  .btn-solid { background: var(--ink); color: var(--paper); }
+  .btn-solid:hover { background: var(--muted); color: var(--paper); }
+  .btn-ghost { background: transparent; }
+
+  /* Header */
+  .site-header { border-bottom: 1px solid var(--ink); }
+  .site-header .wrap {
+    padding-top: 18px; padding-bottom: 18px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand span { font-weight: 700; font-size: 18px; letter-spacing: 0.02em; }
+  .site-nav {
+    display: flex; flex-wrap: wrap; gap: 28px;
+    font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .site-nav a { text-decoration: none; }
+
+  /* Hero */
+  .hero {
+    padding-top: 72px; padding-bottom: 56px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 48px; align-items: end;
+  }
+  .hero > div { display: flex; flex-direction: column; gap: 20px; }
+  .eyebrow { margin: 0; font-family: var(--mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero h1 { margin: 0; font-size: clamp(44px, 6vw, 80px); line-height: 0.98; font-weight: 700; letter-spacing: -0.02em; }
+  .hero p.lede { margin: 0; font-size: 18px; line-height: 1.55; max-width: 46ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Section heads */
+  .section { padding-bottom: 80px; }
+  .section-head {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px;
+    border-top: 2px solid var(--ink); padding-top: 14px; margin-bottom: 24px;
+  }
+  .section-head h2 { margin: 0; font-size: 22px; font-weight: 700; }
+  .section-head .more {
+    font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; padding: 12px 0;
+  }
+
+  /* Featured grid */
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px; background: var(--ink); border: 1px solid var(--ink);
+  }
+  .card { background: var(--paper); display: flex; flex-direction: column; }
+  .card .ph {
+    aspect-ratio: 1 / 1; display: grid; place-items: center;
+    font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: center; padding: 12px;
+  }
+  .card-body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .card-meta { display: flex; justify-content: space-between; gap: 8px; }
+  .card h3 { margin: 0; font-size: 20px; font-weight: 700; }
+  .specs {
+    margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px;
+    font-family: var(--mono); font-size: 12px;
+  }
+  .specs dt { color: var(--muted); }
+  .specs dd { margin: 0; }
+
+  /* Build log */
+  #log .section-head { margin-bottom: 8px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 12px; }
+  .filters button {
+    font: inherit; background: transparent; color: var(--ink);
+    border: 1px solid var(--ink); padding: 8px 14px; min-height: 44px; cursor: pointer;
+  }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .log-intro { margin: 0 0 20px; font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 60ch; }
+  .log { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--ink); }
+  .log li { border-top: 1px solid var(--ink); }
+  .log li[hidden] { display: none; }
+  .log a {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px;
+    padding: 16px 0; text-decoration: none;
+  }
+  .log .ph { width: 112px; height: 84px; flex: none; }
+  .log .no { flex: 0 0 64px; }
+  .log .date { flex: 0 0 96px; }
+  .log .title { display: flex; flex-direction: column; gap: 4px; flex: 1 1 260px; }
+  .log .title strong { font-size: 22px; font-weight: 700; }
+  .log .title span { font-size: 14px; color: var(--muted); }
+  .log .cat, .log .file { font-family: var(--mono); font-size: 12px; flex: 0 0 90px; }
+  .log .arrow { font-size: 20px; }
+
+  /* Commission band */
+  .commission { background: var(--khaki); }
+  .commission .wrap {
+    padding-top: 56px; padding-bottom: 56px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; align-items: center;
+  }
+  .commission h2 { margin: 0; font-size: 36px; line-height: 1.1; font-weight: 700; }
+  .commission .wrap > div { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .commission p { margin: 0; font-size: 17px; line-height: 1.55; }
+
+  /* Footer */
+  .site-footer {
+    padding-top: 28px; padding-bottom: 28px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="images/cycle-hammer.svg" alt="" width="56" height="56">
+      <span>CYCLE &amp; HAMMER</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="#featured">Featured</a>
+      <a href="#log">Build log</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <p class="eyebrow">Catalog No. 01 — Printed objects</p>
+      <h1>Useful things, designed and printed in the shop.</h1>
+    </div>
+    <div>
+      <p class="lede">[ONE-LINE INTRO — who makes these, and what they're for.] Every piece is listed with its material, print settings and downloadable files.</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="#log">Browse every design</a>
+        <a class="btn btn-ghost" href="#">Commission a piece</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured" class="wrap section" aria-labelledby="feat-h">
+    <div class="section-head">
+      <h2 id="feat-h">Featured</h2>
+      <a class="more" href="#log">Full build log →</a>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="ph" role="img" aria-label="Photo placeholder: Fundraiser Ornament">[PHOTO — Fundraiser Ornament]</div>
+        <div class="card-body">
+          <div class="card-meta label"><span>CH-001</span><span>Holiday</span></div>
+          <h3>Fundraiser Ornament</h3>
+          <dl class="specs">
+            <dt>Material</dt><dd>[PLA / PETG]</dd>
+            <dt>Print time</dt><dd>[HH:MM]</dd>
+            <dt>File</dt><dd>[FILES]</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph" role="img" aria-label="Photo placeholder: OPA Token Replica">[PHOTO — OPA Token Replica]</div>
+        <div class="card-body">
+          <div class="card-meta label"><span>CH-002</span><span>Replicas</span></div>
+          <h3>OPA Token Replica</h3>
+          <dl class="specs">
+            <dt>Material</dt><dd>[PLA / PETG]</dd>
+            <dt>Print time</dt><dd>[HH:MM]</dd>
+            <dt>File</dt><dd>[FILES]</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph" role="img" aria-label="Photo placeholder: Team Jersey Tags">[PHOTO — Team Jersey Tags]</div>
+        <div class="card-body">
+          <div class="card-meta label"><span>CH-003</span><span>Sports</span></div>
+          <h3>Team Jersey Tags</h3>
+          <dl class="specs">
+            <dt>Material</dt><dd>[PLA / PETG]</dd>
+            <dt>Print time</dt><dd>[HH:MM]</dd>
+            <dt>File</dt><dd>[FILES]</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="card">
+        <div class="ph" role="img" aria-label="Photo placeholder: Bubbler Motorcycle">[PHOTO — Bubbler Motorcycle]</div>
+        <div class="card-body">
+          <div class="card-meta label"><span>CH-004</span><span>Toys</span></div>
+          <h3>Bubbler Motorcycle</h3>
+          <dl class="specs">
+            <dt>Material</dt><dd>[PLA / PETG]</dd>
+            <dt>Print time</dt><dd>[HH:MM]</dd>
+            <dt>File</dt><dd>[FILES]</dd>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="log" class="wrap section" aria-labelledby="log-h">
+    <div class="section-head">
+      <h2 id="log-h">Build log</h2>
+      <div class="filters" role="group" aria-label="Filter by category">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="holiday" aria-pressed="false">Holiday</button>
+        <button type="button" data-filter="costumes" aria-pressed="false">Costumes</button>
+        <button type="button" data-filter="sports" aria-pressed="false">Sports</button>
+        <button type="button" data-filter="home gifts" aria-pressed="false">Home &amp; gifts</button>
+      </div>
+    </div>
+    <p class="log-intro">Every design, newest first — with how it was made and the files to print your own.</p>
+
+    <ul class="log">
+      <li data-cat="holiday"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Fundraiser Ornament"></div>
+        <span class="label no">CH-001</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Fundraiser Ornament</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Holiday</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="replicas"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: OPA Token Replica"></div>
+        <span class="label no">CH-002</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>OPA Token Replica</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Replicas</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="sports"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Team Jersey Tags"></div>
+        <span class="label no">CH-003</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Team Jersey Tags</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Sports</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="toys"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Bubbler Motorcycle"></div>
+        <span class="label no">CH-004</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Bubbler Motorcycle</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Toys</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="home"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Medicine Bottle Tray"></div>
+        <span class="label no">CH-005</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Medicine Bottle Tray</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Home</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="costumes"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Transforming Halloween Costume"></div>
+        <span class="label no">CH-006</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Transforming Halloween Costume</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Costumes</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="gifts"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: After Moses Bookmarks"></div>
+        <span class="label no">CH-007</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>“After Moses” Bookmarks</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Gifts</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="holiday"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Candy Cane Earrings"></div>
+        <span class="label no">CH-008</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Candy Cane Earrings</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Holiday</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="sports"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Weight Plate RFID Tags"></div>
+        <span class="label no">CH-009</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Weight Plate RFID Tags</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Sports</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="signage"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Branded Light Box"></div>
+        <span class="label no">CH-010</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Branded Light Box</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Signage</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li data-cat="costumes"><a href="#">
+        <div class="ph" role="img" aria-label="Thumbnail placeholder: Mouse Ear Headbands"></div>
+        <span class="label no">CH-011</span><span class="label date">[DATE]</span>
+        <span class="title"><strong>Mouse Ear Headbands</strong><span>[ONE LINE — what changed in this build]</span></span>
+        <span class="cat">Costumes</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="commission">
+    <div class="wrap">
+      <h2>Need a part that doesn't exist yet?</h2>
+      <div>
+        <p>[HOW COMMISSIONS WORK — turnaround, what to send, rough pricing.]</p>
+        <a class="btn btn-solid" href="#">Start a request</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap site-footer label">
+  <span>© Cycle &amp; Hammer</span><span>cycleandhammer.com</span>
+</footer>
+
+<script>
+  // Build log category filter
+  (function () {
+    var buttons = document.querySelectorAll('.filters button');
+    var items = document.querySelectorAll('.log li');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cats = btn.dataset.filter.split(' ');
+        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+        items.forEach(function (li) {
+          li.hidden = !(cats[0] === 'all' || cats.indexOf(li.dataset.cat) !== -1);
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>
