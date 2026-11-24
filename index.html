@@ -90,6 +90,7 @@
     aspect-ratio: 1 / 1; display: grid; place-items: center;
     font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: center; padding: 12px;
   }
+  .card-img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
   .card-body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 12px; }
   .card-meta { display: flex; justify-content: space-between; gap: 8px; }
   .card h3 { margin: 0; font-size: 20px; font-weight: 700; }
@@ -100,36 +101,31 @@
   .specs dt { color: var(--muted); }
   .specs dd { margin: 0; }
 
-  /* Build log */
+  /* Print log */
   #log .section-head { margin-bottom: 8px; }
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--mono); font-size: 12px; }
-  .filters button {
-    font: inherit; background: transparent; color: var(--ink);
-    border: 1px solid var(--ink); padding: 8px 14px; min-height: 44px; cursor: pointer;
-  }
-  .filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
   .log-intro { margin: 0 0 20px; font-size: 16px; line-height: 1.55; color: var(--muted); max-width: 60ch; }
   .log { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--ink); }
   .log li { border-top: 1px solid var(--ink); }
-  .log li[hidden] { display: none; }
-  .log a {
+  .log .row {
     display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px;
     padding: 16px 0; text-decoration: none;
   }
-  .log .ph { width: 112px; height: 84px; flex: none; }
+  .log .ph, .log .thumb { width: 112px; height: 84px; flex: none; }
+  .log .thumb { object-fit: cover; }
   .log .no { flex: 0 0 64px; }
-  .log .date { flex: 0 0 96px; }
   .log .title { display: flex; flex-direction: column; gap: 4px; flex: 1 1 260px; }
   .log .title strong { font-size: 22px; font-weight: 700; }
   .log .title span { font-size: 14px; color: var(--muted); }
-  .log .cat, .log .file { font-family: var(--mono); font-size: 12px; flex: 0 0 90px; }
-  .log .arrow { font-size: 20px; }
+  .log .cat { font-family: var(--mono); font-size: 12px; flex: 0 0 90px; }
 
   /* Commission band */
   .commission { background: var(--khaki); }
   .commission .wrap {
     padding-top: 56px; padding-bottom: 56px;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; align-items: center;
+    display: grid; grid-template-columns: 7fr 3fr; gap: 32px; align-items: center;
+  }
+  @media (max-width: 900px) {
+    .commission .wrap { grid-template-columns: 1fr; gap: 20px; }
   }
   .commission h2 { margin: 0; font-size: 36px; line-height: 1.1; font-weight: 700; }
   .commission .wrap > div { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
@@ -147,13 +143,11 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">
-      <img src="images/cycle-hammer.svg" alt="" width="56" height="56">
       <span>CYCLE &amp; HAMMER</span>
     </a>
     <nav class="site-nav" aria-label="Main">
       <a href="#featured">Featured</a>
-      <a href="#log">Build log</a>
-      <a href="#">About</a>
+      <a href="#log">Print log</a>
       <a href="#">Contact</a>
     </nav>
   </div>
@@ -163,13 +157,13 @@
   <section class="wrap hero">
     <div>
       <p class="eyebrow">Catalog No. 01 — Printed objects</p>
-      <h1>Useful things, designed and printed in the shop.</h1>
+      <h1>Usable things, designed and printed in the shop.</h1>
     </div>
     <div>
-      <p class="lede">[ONE-LINE INTRO — who makes these, and what they're for.] Every piece is listed with its material, print settings and downloadable files.</p>
+      <p class="lede">Ideas are exciting, but there is something different about being able to hold a thing.</p>
       <div class="actions">
-        <a class="btn btn-solid" href="#log">Browse every design</a>
-        <a class="btn btn-ghost" href="#">Commission a piece</a>
+        <a class="btn btn-solid" href="#log">Browse recent designs</a>
+        <a class="btn btn-ghost" href="#">Request something</a>
       </div>
     </div>
   </section>
@@ -177,55 +171,51 @@
   <section id="featured" class="wrap section" aria-labelledby="feat-h">
     <div class="section-head">
       <h2 id="feat-h">Featured</h2>
-      <a class="more" href="#log">Full build log →</a>
+      <a class="more" href="#log">Print log →</a>
     </div>
 
     <div class="cards">
       <article class="card">
-        <div class="ph" role="img" aria-label="Photo placeholder: Fundraiser Ornament">[PHOTO — Fundraiser Ornament]</div>
+        <img class="card-img" src="images/fundraiser-ornament.jpg" alt="Westwood 2024 fundraiser ornament printed in matte PLA: a white tree rising over a blue and green globe inside a white ring" width="1200" height="1200" loading="lazy">
         <div class="card-body">
           <div class="card-meta label"><span>CH-001</span><span>Holiday</span></div>
           <h3>Fundraiser Ornament</h3>
           <dl class="specs">
             <dt>Material</dt><dd>[PLA / PETG]</dd>
             <dt>Print time</dt><dd>[HH:MM]</dd>
-            <dt>File</dt><dd>[FILES]</dd>
           </dl>
         </div>
       </article>
       <article class="card">
-        <div class="ph" role="img" aria-label="Photo placeholder: OPA Token Replica">[PHOTO — OPA Token Replica]</div>
+        <img class="card-img" src="images/opa-token-replica.jpg" alt="Red and blue OPA point tokens, 25 mm, printed in matte PLA" width="1200" height="1200" loading="lazy">
         <div class="card-body">
           <div class="card-meta label"><span>CH-002</span><span>Replicas</span></div>
           <h3>OPA Token Replica</h3>
           <dl class="specs">
             <dt>Material</dt><dd>[PLA / PETG]</dd>
             <dt>Print time</dt><dd>[HH:MM]</dd>
-            <dt>File</dt><dd>[FILES]</dd>
           </dl>
         </div>
       </article>
       <article class="card">
-        <div class="ph" role="img" aria-label="Photo placeholder: Team Jersey Tags">[PHOTO — Team Jersey Tags]</div>
+        <img class="card-img" src="images/team-jersey-tags.jpg" alt="Basketball jersey tag printed in matte PLA: white jersey with red name ANDERSON, blue number 0 outlined in red, and an orange basketball" width="1200" height="1200" loading="lazy">
         <div class="card-body">
           <div class="card-meta label"><span>CH-003</span><span>Sports</span></div>
           <h3>Team Jersey Tags</h3>
           <dl class="specs">
             <dt>Material</dt><dd>[PLA / PETG]</dd>
             <dt>Print time</dt><dd>[HH:MM]</dd>
-            <dt>File</dt><dd>[FILES]</dd>
           </dl>
         </div>
       </article>
       <article class="card">
-        <div class="ph" role="img" aria-label="Photo placeholder: Bubbler Motorcycle">[PHOTO — Bubbler Motorcycle]</div>
+        <img class="card-img" src="images/bubbler-motorcycle.jpg" alt="Bubbler motorcycle toy printed in matte PLA: black frame and wheels, dark green tank, dark brown seat, and ash gray handlebars and tailpipe" width="1200" height="1200" loading="lazy">
         <div class="card-body">
           <div class="card-meta label"><span>CH-004</span><span>Toys</span></div>
           <h3>Bubbler Motorcycle</h3>
           <dl class="specs">
             <dt>Material</dt><dd>[PLA / PETG]</dd>
             <dt>Print time</dt><dd>[HH:MM]</dd>
-            <dt>File</dt><dd>[FILES]</dd>
           </dl>
         </div>
       </article>
@@ -234,93 +224,80 @@
 
   <section id="log" class="wrap section" aria-labelledby="log-h">
     <div class="section-head">
-      <h2 id="log-h">Build log</h2>
-      <div class="filters" role="group" aria-label="Filter by category">
-        <button type="button" data-filter="all" aria-pressed="true">All</button>
-        <button type="button" data-filter="holiday" aria-pressed="false">Holiday</button>
-        <button type="button" data-filter="costumes" aria-pressed="false">Costumes</button>
-        <button type="button" data-filter="sports" aria-pressed="false">Sports</button>
-        <button type="button" data-filter="home gifts" aria-pressed="false">Home &amp; gifts</button>
-      </div>
+      <h2 id="log-h">Print log</h2>
     </div>
-    <p class="log-intro">Every design, newest first — with how it was made and the files to print your own.</p>
+    <p class="log-intro">In no particular order — each one an idea before it was usable.</p>
 
     <ul class="log">
-      <li data-cat="holiday"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Fundraiser Ornament"></div>
-        <span class="label no">CH-001</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Fundraiser Ornament</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Holiday</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="replicas"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: OPA Token Replica"></div>
-        <span class="label no">CH-002</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>OPA Token Replica</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Replicas</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="sports"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Team Jersey Tags"></div>
-        <span class="label no">CH-003</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Team Jersey Tags</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Sports</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="toys"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Bubbler Motorcycle"></div>
-        <span class="label no">CH-004</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Bubbler Motorcycle</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Toys</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="home"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Medicine Bottle Tray"></div>
-        <span class="label no">CH-005</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Medicine Bottle Tray</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Home</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="costumes"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Transforming Halloween Costume"></div>
-        <span class="label no">CH-006</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Transforming Halloween Costume</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Costumes</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="gifts"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: After Moses Bookmarks"></div>
-        <span class="label no">CH-007</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>“After Moses” Bookmarks</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Gifts</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="holiday"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Candy Cane Earrings"></div>
-        <span class="label no">CH-008</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Candy Cane Earrings</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Holiday</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="sports"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Weight Plate RFID Tags"></div>
-        <span class="label no">CH-009</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Weight Plate RFID Tags</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Sports</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="signage"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Branded Light Box"></div>
-        <span class="label no">CH-010</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Branded Light Box</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Signage</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
-      <li data-cat="costumes"><a href="#">
-        <div class="ph" role="img" aria-label="Thumbnail placeholder: Mouse Ear Headbands"></div>
-        <span class="label no">CH-011</span><span class="label date">[DATE]</span>
-        <span class="title"><strong>Mouse Ear Headbands</strong><span>[ONE LINE — what changed in this build]</span></span>
-        <span class="cat">Costumes</span><span class="file">[FILES]</span><span class="arrow" aria-hidden="true">→</span>
-      </a></li>
+      <li><div class="row">
+        <img class="thumb" src="images/fundraiser-ornament.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-001</span>
+        <span class="title"><strong>Fundraiser Ornament</strong><span>Westwood Baptist Church</span></span>
+        <span class="cat">Holiday</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/opa-token-replica.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-002</span>
+        <span class="title"><strong>OPA Token Replica</strong><span>World War II ration tokens</span></span>
+        <span class="cat">Replicas</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/team-jersey-tags.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-003</span>
+        <span class="title"><strong>Team Jersey Tags</strong><span>A team set of luggage tags</span></span>
+        <span class="cat">Sports</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/bubbler-motorcycle.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-004</span>
+        <span class="title"><strong>Bubbler Motorcycle</strong><span>A vroom vroom bubble machine</span></span>
+        <span class="cat">Toys</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/medicine-bottle-tray.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-005</span>
+        <span class="title"><strong>Medicine Bottle Tray</strong><span>Storage, tray, and travel</span></span>
+        <span class="cat">Home</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/after-moses-bookmarks.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-006</span>
+        <span class="title"><strong>“After Moses” Bookmarks</strong><span>Hi-tech for a low-tech medium</span></span>
+        <span class="cat">Gifts</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/candy-cane-earrings.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-007</span>
+        <span class="title"><strong>Candy Cane Earrings</strong><span>They look tasty, but microplastics</span></span>
+        <span class="cat">Holiday</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/weight-plate-rfid-tags.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-008</span>
+        <span class="title"><strong>Weight Plate RFID Tags</strong><span>Do you even scan-in, bro?</span></span>
+        <span class="cat">Sports</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/branded-light-box.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-009</span>
+        <span class="title"><strong>Branded Light Box</strong><span>Give light to a dark office space</span></span>
+        <span class="cat">Signage</span>
+      </div></li>
+      <li><div class="row">
+        <img class="thumb" src="images/mouse-ear-headbands.jpg" alt="" width="112" height="84" loading="lazy">
+        <span class="label no">CH-010</span>
+        <span class="title"><strong>Mouse Ear Headbands</strong><span>Donald was very impressed</span></span>
+        <span class="cat">Costumes</span>
+      </div></li>
     </ul>
   </section>
 
   <section class="commission">
     <div class="wrap">
-      <h2>Need a part that doesn't exist yet?</h2>
+      <h2>Want something that doesn't exist, yet?</h2>
       <div>
-        <p>[HOW COMMISSIONS WORK — turnaround, what to send, rough pricing.]</p>
-        <a class="btn btn-solid" href="#">Start a request</a>
+        <p>Have an idea you'd like to see usable?</p>
+        <a class="btn btn-solid" href="#">Request something</a>
       </div>
     </div>
   </section>
@@ -330,21 +307,5 @@
   <span>© Cycle &amp; Hammer</span><span>cycleandhammer.com</span>
 </footer>
 
-<script>
-  // Build log category filter
-  (function () {
-    var buttons = document.querySelectorAll('.filters button');
-    var items = document.querySelectorAll('.log li');
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var cats = btn.dataset.filter.split(' ');
-        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
-        items.forEach(function (li) {
-          li.hidden = !(cats[0] === 'all' || cats.indexOf(li.dataset.cat) !== -1);
-        });
-      });
-    });
-  })();
-</script>
 </body>
 </html>
